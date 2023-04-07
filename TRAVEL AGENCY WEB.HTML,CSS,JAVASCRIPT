@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Travel AGENCY</title>
+  <style>
+    form{
+      text-align: center;
+      margin: 0 auto;
+      width: 400px;
+      height: 150px;
+      font-style: italic;
+    }
+    h1{
+      text-align: center;
+      font-style: oblique;
+    }
+    h3{
+      text-align: center;
+      color: darkblue;
+    }
+    body{
+      background-image: url("https://c8.alamy.com/comp/2ATM139/summer-travel-concept-flat-lay-traveler-accessories-on-yellow-background-with-copy-space-top-view-plane-passport-map-travel-agency-banner-design-2ATM139.jpg");
+
+
+    }
+    header {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  nav {
+    margin-bottom: 1rem;
+  }
+  
+  nav ul {
+    list-style: none;
+    display: flex;
+  }
+  
+  nav ul li {
+    margin-right: 1rem;
+  }
+  
+  nav ul li a {
+    color: black;
+    font-size: 20px;
+    text-decoration: none;
+  }
+
+    .ebutton{
+      position: relative;
+      display: inline-block;
+      padding:10px;
+      background-color: blueviolet;
+      color:gold;
+      border: none;
+      border-radius:5px ;
+      font-size: 12px;
+      cursor: pointer;
+      margin-left: 50px;
+    }
+    .ebutton:hover:before{
+      content: "\f044";
+      font-family: FontAwesome;
+      position: absolute;
+      top: 50%;
+      left: 5px;
+      transform: translateY(-50%);
+      font-size: 20px;
+    }
+    label{
+      display: inline-block;
+      width: 100px;
+    }
+
+  </style>
+</head>
+<body><br><br>
+  <header><br>
+    <nav>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Tours</a></li>
+          <li><a href="#">Destinations</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+</header>
+  <h1>TRAVEL AGENCY</h1>
+  <h3>Register</h3>
+  <form action="/register" method="post">
+    <label for="name">Name: </label>
+    <input type="text" id="name" name="name" required><br><br>
+    <label for="email">Email: </label>
+    <input type="email" id="email" name="email" required><br><br>
+    <label for="password">Password: </label>
+    <input type="password" id="password" name="password" required><br><br>
+    <button class="ebutton">Register</button>
+  </form>
+
+  <h3>Login</h3>
+  <form action="/login" method="post">
+    <label for="email">Email: </label>
+    <input type="email" id="email" name="email" required><br><br>
+    <label for="password">Password: </label>
+    <input type="password" id="password" name="password" required><br><br>
+    <button class="ebutton">login</button>
+  </form>
+
+  <h3>View Food Details</h3>
+  <!-- Display food details retrieved from the server -->
+  <ul id="foodDetails"></ul>
+
+  <h3>View Hostel Details</h3>
+  <!-- Display hostel details retrieved from the server -->
+  <ul id="hostelDetails"></ul>
+
+  <h3>View Route Details</h3>
+  <!-- Display route details retrieved from the server -->
+  <ul id="routeDetails"></ul>
+
+  <h3>My Book Accommodation</h3>
+  <!-- Display user's booked accommodation details retrieved from the server -->
+  <ul id="myBookings"></ul>
+
+  <!-- JavaScript code for fetching data from server and displaying on the page -->
+  <script>
+    // Fetch and display food details
+    fetch('/foodDetails')
+      .then(response => response.json())
+      .then(data => {
+        const foodDetails = document.getElementById('foodDetails');
+        data.forEach(food => {
+          const li = document.createElement('li');
+          li.textContent = `Cuisine: ${food.cuisine}, Menu: ${food.menu}, Price: ${food.price}`;
+          foodDetails.appendChild(li);
+        });
+      });
+
+    // Fetch and display hostel details
+    fetch('/hostelDetails')
+      .then(response => response.json())
+      .then(data => {
+        const hostelDetails = document.getElementById('hostelDetails');
+        data.forEach(hostel => {
+          const li = document.createElement('li');
+          li.textContent = `Accommodation: ${hostel.accommodation}, Amenities: ${hostel.amenities}, Price: ${hostel.price}`;
+          hostelDetails.appendChild(li);
+        });
+      });
+
+    // Fetch and display route details
+    fetch('/routeDetails')
+      .then(response => response.json())
+      .then(data => {
+        const routeDetails = document.getElementById('routeDetails');
+        data.forEach(route => {
+          const li = document.createElement('li');
+          li.textContent = `Transportation: ${route.transportation}, Details: ${route.details}`;
+          routeDetails.appendChild(li);
+        });
+      });
+
+    // Fetch and display user's booked accommodation details
+    fetch('/myBookings')
+      .then(response => response.json())
+      .then(data => {
+        const myBookings = document.getElementById('myBookings');
+        data
+      </script>
+    </body>
+    </html>
